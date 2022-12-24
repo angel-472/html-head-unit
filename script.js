@@ -10,5 +10,5 @@ function updateSpeed(pos){
   userLocation = pos;
   console.log(pos);
   let movementSpeed = pos.coords.speed;
-  txtSpeed.innerText = (movementSpeed ? movementSpeed : "0") + " MPH"
+  txtSpeed.innerText = movementSpeed + " MPH"
 }
