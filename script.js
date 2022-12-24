@@ -2,9 +2,9 @@ const txtSpeed = document.getElementById("speed")
 let userLocation = '';
 
 
-setInterval(function(){
-  navigator.geolocation.getCurrentPosition(updateSpeed);
-}, 1000);
+navigator.geolocation.watchPosition(function(position) {
+  updateSpeed(position)
+});
 
 function updateSpeed(pos){
   userLocation = pos;
