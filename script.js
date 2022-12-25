@@ -1,26 +1,22 @@
-const txtLocation = document.getElementById("coords")
-const txtClock = document.getElementById("clock")
-const txtSpeed = document.getElementById("speed")
-let userLocation = '';
+const txtLocation = document.querySelector(".coords")
+const txtClock = document.querySelector(".clock")
+const txtSpeed = document.querySelector(".speed")
+let userLocation = null;
 
 
-navigator.geolocation.watchPosition(function(position) {
+setInterval(function(){
+  let currentdate = new Date()
+  let date = (currentdate.getHours() < 10)?"0":"" + ((currentdate.getHours()>12)?(currentdate.getHours()-12):currentdate.getHours()) +":"+ ((currentdate.getMinutes() < 10)?"0":"") + currentdate.getMinutes() + ((currentdate.getHours()>12)?(' PM'):' AM')
+  txtClock.innerText = date
+}, 1000);
+
+/*navigator.geolocation.watchPosition(function(position) {
   updateSpeed(position)
-});
+});*/
 
 function updateSpeed(pos){
   userLocation = pos;
   console.log(pos);
   let movementSpeed = pos.coords.speed;
-  txtSpeed.innerText = movementSpeed + " MPH"
-
-  txtLocation.innerText = `${pos.coords.latitude} ${pos.coords.longitude}`;
-  updateClock();
-}
-
-
-function updateClock(){
-  let currentdate = new Date()
-  let date = (currentdate.getHours() < 10)?"0":"" + ((currentdate.getHours()>12)?(currentdate.getHours()-12):currentdate.getHours()) +":"+ ((currentdate.getMinutes() < 10)?"0":"") + currentdate.getMinutes() +":"+ ((currentdate.getSeconds() < 10)?"0":"") + currentdate.getSeconds() + ((currentdate.getHours()>12)?(' PM'):' AM')
-  txtClock.innerText = date
+  txtSpeed.innerText = (movementSpeed ? movementSpeed : 0)
 }
